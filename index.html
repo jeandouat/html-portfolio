@@ -1,20 +1,244 @@
-<!-- TODO 1: Create the HTML Boilerplate -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jean's Portfolio</title>
+    <link rel="stylesheet" href="quiz.css">
+  <title>THE AMAZING MAX'S QUIZ</title>
 </head>
 <body>
-    <h1>Welcome to my Portfolio!</h1>
-    <hr />
-    <h2>Birthday Invite</h2>
-    <a href="./public/birthday-invite.html"><img src="./assets/images/birthday-cake3.4.jpeg" width="300" height="200"></a>
-    <hr />
-    <h2>Cool Movies!</h2>
-    <a href="./public/Movies.html"><img src="./assets/images/movies.5.JPG" width="150" height="150"></a>
-    <hr/>
-    <a href="./public/contact.html">Contact Me</a>   <a href="./public/about.html">About Me</a>
+  <h1>THE AMAZING MAX'S QUIZ</h1>
+  <p>Click the button below to start the quiz.</p>
+
+  <div id="quizQuestions">
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <script>
+    let totalQuestions = 0;
+    let score = 0;
+    let currentQuestionIndex = 0;
+    let quizQuestions = [
+      {
+        question: "1) What is the biggest moon in our solar system?",
+        answer: "Ganymede",
+        image: "images/q1_ganymede.jpg",
+        correctFeedback: "Great! Ganymede really IS the biggest moon in the Solar System.",
+        incorrectFeedback: "I am sorry, this is not the right answer."
+      },
+      {
+        question: "2) What are the twin stars in Matariki?\nA) Tupu-a-nuku, Tupu-a-rangi; B) Waita, Waiti; C) Ururangi, Matariki - Use Letter for answer",
+        answer: "B",
+        image: "images/q2_Matariki.png",
+        correctFeedback: "Ka pai! Waita and Waiti ARE the twin stars of Matariki!!",
+        incorrectFeedback: "I am sorry, but the correct answer was B."
+      },
+      {
+        question: "3) What is the biggest moon of Neptune?",
+        answer: "Triton",
+        image: "images/q3_triton.png",
+        correctFeedback: "That is correct! You are a planetary Master!",
+        incorrectFeedback: "I am sorry, you need to study a bit more."
+      },
+      {
+        question: "4) When was Triton first discovered? A) 1864; B) 1842; C) 1905; D) 1935 or E) 1846 - Please use the Letters as answer, not the year",
+        answer: "E",
+        image: "images/question_mark.png",
+        correctFeedback: "Yes! Amazing isn't it? It was a looooong time ago!",
+        incorrectFeedback: "That is not the correct answer...."
+      },
+      {
+        question: "5) What is the smallest moon of Uranus?",
+        answer: "Ferdinand",
+        image: "images/q5_ferdinand.png",
+        correctFeedback: "Yes! Ferdinand is the outermost retrograde irregular satellite of Uranus.",
+        incorrectFeedback: "I am sorry, but I think you need to study a bit more about Uranus."
+      },
+      {
+        question: "6) What Planet has the farthest moon from Earth?",
+        answer: "Neptune",
+        image: "images/q6_neptune.png",
+        correctFeedback: "You are right! It is Neptune...just wait for the next question...!",
+        incorrectFeedback: "I am sorry but that is not correct..."
+      },
+      {
+        question: "7) Now...what is THE NAME of the farthest moon from the planet Earth?",
+        answer: "Neso",
+        image: "images/q7_neso.png",
+        correctFeedback: "Wow! That was AWESOME! Neso, also known as Neptune XIII, is the outermost known natural satellite of Neptune.",
+        incorrectFeedback: "I am sorry...the correct answer was Neso."
+      },
+      {
+        question: "8) Still talking about Neso, when was it discovered?? A) 1958; B) 2015; C) 2002 or D) 1846? Please use the letter",
+        answer: "C",
+        image: "images/question_mark2.png",
+        correctFeedback: "You are AMAZING!",
+        incorrectFeedback: "I am sorry..but that was a DIFFICULT one!"
+      },
+      {question: "9) Which moon of Jupiter is known for its intense volcanic activity and sulfur-rich surface?",
+        answer: "Io",
+        image: "images/q9_io.png",
+        correctFeedback: "Absolutely correct! Io is the most volcanically active body in the solar system!",
+        incorrectFeedback: "I'm sorry, but that's not the right answer. Keep trying!"
+          },
+      {
+        question: "10) What is the largest moon of Pluto?",
+        answer: "Charon",
+        image: "images/q10_charon.png",
+        correctFeedback: "Holly Cow!! Superb!",
+        incorrectFeedback: "I am sorry, the correct answer was Charon."
+      },
+      {
+        question: "11) Which moon of Saturn is known for its distinctive 'tiger stripes' pattern?",
+        answer: "Enceladus",
+        image: "images/q11_enceladus.png",
+        correctFeedback: "Oh wow! You are amazing! That is correct, and many researchers consider Enceladus to be among the most likely places to house extraterrestrial life.",
+        incorrectFeedback: "I am very sorry, the correct answer was Enceladus."
+      },
+      {
+        question: "12) Which moon of Mars is named after the mythological Roman god of war?",
+        answer: "Phobos",
+        image: "images/q12_phobos.png",
+        correctFeedback: "Great job! Remember the song 'How many moons does each planet have'? 😀",
+        incorrectFeedback: "I am sorry, the correct answer was Phobos 😩"
+      },
+      {
+        question: "13) What is the smallest innermost Moon of Saturn?",
+        answer: "Pan",
+        image: "images/q13_pan.png",
+        correctFeedback: "Oh YEAH! You know everything, man!!! Super scooodooo!!!",
+        incorrectFeedback: "That was a very difficult one. The actual moon is Pan."
+      },
+      {
+        question: "14) What is the second-largest moon of Saturn?",
+        answer: "Rhea",
+        image: "images/q14_rhea.png",
+        correctFeedback: "YES! Rhea is the second-largest moon of Saturn and the ninth-largest moon in the Solar System, with a surface area that is comparable to the area of Australia.",
+        incorrectFeedback: "I am sorry. The correct moon was Rhea."
+      },
+      {
+        question: "15) Which moon of Mars has a large impact crater named Stickney?",
+        answer: "Phobos",
+        image: "images/q15_phobos.png",
+        correctFeedback: "Yes! That is Phobos again! Stickney is the largest crater on Phobos, which is a satellite of Mars. It is 9 km (5.6 mi) in diameter.",
+        incorrectFeedback: "The correct moon was Phobos again."
+      },
+
+      {
+        question: "16) Which moon of Uranus was discovered by William Herschel in 1787 and is the second-largest moon of the planet?",
+        answer: "Oberon",
+        image: "images/q16_oberon.png",
+        correctFeedback: "It is the second-largest, with a surface area that is comparable to the area of Australia, and the second most massive of the Uranian moons, and the ninth most massive moon in the Solar System.",
+        incorrectFeedback: "I am very sorry, but the answer was Oberon."
+      },
+      {
+        question: "17) Which moon of Neptune is the third-largest moon in the solar system and exhibits a geologically diverse surface?",
+        answer: "Umbriel",
+        image: "images/q17_umbriel.png",
+        correctFeedback: "Yes, it is Umbriel! Umbriel consists mainly of ice with a substantial fraction of rock, and may be differentiated into a rocky core and an icy mantle. The surface is the darkest among Uranian moons, and appears to have been shaped primarily by impacts.",
+        incorrectFeedback: "I am sorry, the answer was Umbriel."
+      },
+      {
+        question: "18) What is the outermost known moon of Neptune, discovered in 1949?",
+        answer: "Nereid",
+        image: "images/q18_nereid.png",
+        correctFeedback: "Wow! You got this one?!?! Congrats!! Nereid, or Neptune II, is the third-largest moon of Neptune. It has the most eccentric orbit of all known moons in the Solar System. It was the second moon of Neptune to be discovered, by Gerard Kuiper in 1949.",
+        incorrectFeedback: "I am sorry, the correct answer was Nereid."
+      },
+      {
+        question: "19) Which moon of Jupiter is known for its highly inclined and irregular orbit?",
+        answer: "Himalia",
+        image: "images/q19_himalia.png",
+        correctFeedback: "That was very difficult....and you got it!!! Himalia, or Jupiter VI, is the largest irregular satellite of Jupiter, with a diameter of at least 140 km (90 mi).",
+        incorrectFeedback: "I am terribly sorry, that answer was Himalia."
+      },
+      {
+        question: "20) This is the last question of this game and it is VERY difficult. What is the name of the Earth's Moon?",
+        answer: "Luna",
+        image: "images/q20_luna.png",
+        correctFeedback: "That was actually easy, wasn't it? You got it!!",
+        incorrectFeedback: "Are you kidding me? You didn't know the answer to that one?? Ask daddy 😂"
+      }
+
+  ];
+
+    function startQuiz() {
+      let quizContainer = document.getElementById("quizQuestions");
+      quizContainer.innerHTML = "";
+
+      showQuestion();
+    }
+
+    function showQuestion() {
+      let quizContainer = document.getElementById("quizQuestions");
+      quizContainer.innerHTML = "";
+
+      let questionElement = document.createElement("p");
+      questionElement.textContent = quizQuestions[currentQuestionIndex].question;
+      questionElement.classList.add("questionText");
+
+      let answerInput = document.createElement("input");
+      answerInput.type = "text";
+      answerInput.classList.add("answerInput");
+
+      let imageElement = document.createElement("img");
+      imageElement.src = quizQuestions[currentQuestionIndex].image;
+      imageElement.classList.add("questionImage");
+
+      let submitButton = document.createElement("button");
+      submitButton.textContent = "Submit";
+      submitButton.onclick = calculateScore;
+
+      quizContainer.appendChild(questionElement);
+      quizContainer.appendChild(answerInput);
+      quizContainer.appendChild(imageElement);
+      quizContainer.appendChild(submitButton);
+
+      answerInput.focus();
+    }
+
+    function calculateScore() {
+      let answerInputs = document.getElementsByClassName("answerInput");
+
+      let userAnswer = answerInputs[0].value;
+      let correctAnswer = quizQuestions[currentQuestionIndex].answer;
+
+      totalQuestions += 1;
+
+      if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        score += 1;
+        displayFeedback(quizQuestions[currentQuestionIndex].correctFeedback, true);
+      } else {
+        displayFeedback(quizQuestions[currentQuestionIndex].incorrectFeedback, false);
+      }
+
+      setTimeout(function() {
+        currentQuestionIndex += 1;
+        if (currentQuestionIndex > quizQuestions.length - 1) {
+          displayFinalScore();
+        } else {
+          showQuestion();
+        }
+      }, 5000);
+    }
+
+    function displayFeedback(message, isCorrect) {
+      let feedbackElement = document.createElement("p");
+      feedbackElement.textContent = message;
+      feedbackElement.classList.add(isCorrect ? "correct-feedback" : "incorrect-feedback");
+      let quizContainer = document.getElementById("quizQuestions");
+      quizContainer.appendChild(feedbackElement);
+    }
+
+    function displayFinalScore() {
+      let quizContainer = document.getElementById("quizQuestions");
+      quizContainer.innerHTML = "";
+
+      let scoreElement = document.createElement("p");
+      scoreElement.id = "score";
+      scoreElement.className = "score-element";
+      scoreElement.textContent = "Your score is " + score + " out of " + totalQuestions;
+      quizContainer.appendChild(scoreElement);
+    }
+
+  </script>
 </body>
 </html>

@@ -1,0 +1,57 @@
+#quizQuestions {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #efff0e;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid black; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-self: center;
+  }
+  
+  .questionContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  .questionText {
+    flex-grow: 1;
+    font-size: x-large;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    margin-right: 20px;
+  }
+  
+  .questionImage {
+    max-width: 200px;
+    height: auto;
+  }
+  
+  .answerInput {
+    font-size: larger;
+    font-weight: bold;
+  }
+  .score-element {
+    color: blue;
+    font-weight: 600;
+    font-size: 40px;
+  }
+
+  .questionImage{
+    width: 400px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  
+  button {
+    margin: 10px auto 0;
+    display: block; 
+    font-size: large;
+  }
+  
+  
